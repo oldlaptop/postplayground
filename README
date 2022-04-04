@@ -1,0 +1,17 @@
+This is a simple, dumb Wapp (https://wapp.tcl.tk) application that does nothing
+but log all requests it recieves to stdout, including the content of any POSTs,
+intended for debugging purposes. Writing it and this README was faster than
+finding whatever thing may already exist that does this job. A usual invocation
+might be:
+
+$ ./postplayground --server 8080
+
+after making wapp.tcl available to [package require], perhaps by doing the moral
+equivalent of:
+
+$ cp /path/to/wapp/checkout/wapp.tcl /somewhere/in/tcl/modules/path/wapp-1.0.0.tm
+
+Recalling of course that /somewhere/in/tcl/modules/path may be *added* to Tcl's
+module path with something like:
+
+$ export TCL8_6_TM_PATH=/somewhere/in/tcl/modules/path
