@@ -1,0 +1,30 @@
+#! /usr/bin/env tclsh
+
+package require wapp
+
+proc wapp-default {} {
+	foreach var {
+		CONTENT
+		CONTENT_LENGTH
+		CONTENT_TYPE
+		HTTP_USER_AGENT
+		REQUEST_METHOD
+		REQUEST_URI
+		REMOTE_ADDR
+		REMOTE_PORT
+	} {
+		set $var [wapp-param $var]
+	}
+
+	puts "[clock format [clock seconds] -format %Y-%d-%mT%H:%M:%S]: $REQUEST_METHOD $REQUEST_URI from $REMOTE_ADDR:$REMOTE_PORT ($HTTP_USER_AGENT)"
+	switch -exact -- $REQUEST_METHOD {
+		POST {
+			puts "content ($CONTENT_LENGTH octets of $CONTENT_TYPE):"
+			puts $CONTENT
+		}
+		default {}
+	}
+	puts ""
+}
+
+wapp-start $argv
